@@ -1,0 +1,13 @@
+\documentclass[10pt]{article}
+\usepackage[landscape,a4paper,top=1.5cm,right=1.5cm,bottom=1.5cm,left=1.5cm]{geometry}
+\pagestyle{empty}
+%\usepackage[utf8]{inputenc}
+%\usepackage{czech}
+
+\begin{document}
+
+\input &&&chordMacro&&&
+
+\def\chBase#1{\chFont #1}   % override default chord base macro
+
+\def\chSrc#1{\small \tt $\backslash$ch.#1.}

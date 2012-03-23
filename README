@@ -1,0 +1,58 @@
+2012-03-16
+Author: Ondrej Fafejta
+
+I. Installation
+
+1. pre-requisite
+I suppose you have installed musixtex, pmx, musixflx, musixlyr.
+see
+http://icking-music-archive.org/software/indexmt6.html
+
+2. install chords macros
+
+Copy files texmf/tex/chords*.tex to your home texmf/tex dir.
+After copy the files you must call texhash command.
+
+You can use install.sh script.
+
+3. try type some example notes. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
+
+$ cd example/noel/aj_co_to_hlasaju
+$ pmx_dvi.sh aj_co_to_hlasaju
+
+The noel is in original signature F-major.
+Try to edit file aj_co_to_hlasaju.pmx and modify lines
+
+\input chordsCZ     % chords input czech - B is displayed as H, Bf is displayed as B
+%\input chords     % chords default - B -> B, Bf -> Bf
+
+Next uncomment line
+K-2+2
+
+Call again 
+$ pmx_dvi.sh aj_co_to_hlasaju
+
+The noel is in transposed signature D-major.
+The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.
+
+
+
+I will try to describe how to use scripts bin/pmx_dvi.sh or bin/pmx_dvi.sh.
+
+The script file require one parameter. File name without .pmx suffix.
+a) chords transposition script chords_transpose.pl is called.
+b) pmx preprocesor is called (the .tex file is created)
+c) musixtex three steps is called
+- tex
+- musixflx
+- tex
+
+
+II. project structure
+
+bin      - contains chords transposition scripts and other useful script.
+doc      - contains reference table chords and generated examples in pdf
+example  - contains some source example (.pmx files)
+texmf    - contains chords macros - two variants global and for Czech country.
+work     - contains generator chords macros and ref tables.
+

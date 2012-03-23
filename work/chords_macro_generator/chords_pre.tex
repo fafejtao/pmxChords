@@ -1,0 +1,105 @@
+\font\chFont=cmbx10 scaled \magstep0
+\font\chFontRm=cmbx8 scaled \magstep0
+\font\chFontIdx=cmbx7 scaled \magstep0
+
+
+\def\ch.#1.{\csname  ch:#1\endcsname}
+\def\defch.#1.{\expandafter \def \csname ch:#1\endcsname}
+
+\def\chFlat{$\scriptstyle\flat$}
+\def\chSharp{$\scriptstyle\sharp$}
+%\def\chDim{$\circ$}
+\def\chDim{dim}
+\def\chMaj{$\scriptstyle\bigtriangleup$}
+%\def\chMaj{maj}
+
+%
+% Base chords
+%
+\def\chVerticalAlign{13}% basic vertical align \internotes
+\def\chBase#1{\zchar{\chVerticalAlign}{\chFont #1}}
+
+%
+% Macros for chords without sharp or flat
+% it means C, D, E, F, G, A, B
+%
+\def\chX#1{\chBase{#1}}
+\def\chXOneParam#1#2{\chBase{#1{\chFontRm #2}}}
+\def\chXm#1{\chXOneParam{#1}{m}}
+\def\chXPlus#1{\chXOneParam{#1}{+}}
+\def\chXSus#1{\chXOneParam{#1}{sus}}
+\def\chXDim#1{\chXOneParam{#1}{\chDim}}
+\def\chXMaj#1{\chXOneParam{#1}{\chMaj}}
+
+\def\chXOneParamUpper#1#2{\chBase{#1\lower-1ex\hbox{\chFontIdx #2}}}
+%\def\chXDim#1{\chXOneParamUpper{#1}{\chDim}}
+\def\chXSix#1{\chXOneParamUpper{#1}{6}}
+\def\chXSeven#1{\chXOneParamUpper{#1}{7}}
+\def\chXNine#1{\chXOneParamUpper{#1}{9}}
+\def\chXNineFlat#1{\chXOneParamUpper{#1}{\chFontIdx 9\chFlat}}
+
+\def\chXTwoParams#1#2#3{\chBase{#1{\chFontRm #2}\lower-1ex\hbox{\chFontIdx #3}}}
+\def\chXmSeven#1{\chXTwoParams{#1}{m}{7}}
+\def\chXmSix#1{\chXTwoParams{#1}{m}{6}}
+\def\chXmFiveFlat#1{\chXTwoParams{#1}{m}{5\chFlat}}
+\def\chXSusSeven#1{\chXTwoParams{#1}{sus}{7}}
+
+\def\chXmSevenFiveFlat#1{\chBase{#1{\chFontRm m}\lower0.5ex\vbox{\baselineskip=1ex\hbox{\chFontIdx 7}\hbox{\chFontIdx 5\chFlat}}}}
+%\def\chXmSevenFiveFlat#1{\chBase{#1{\chFontRm m}\lower0.5ex\vbox{\baselineskip=1ex\hbox{\chFontIdx 7}\hbox{\chFontIdx 5\chFlat}}}}
+
+
+%
+% Macros for chords with flat
+% it means Ef, Af, Bf
+%
+\def\chXFlat#1{\chXOneParamUpper{#1}{\chFlat}}
+
+\def\chXFlatOneParam#1#2{\chBase{#1\lower-1.1ex\hbox{\chFlat}\kern-0.3em\hbox{\chFontRm #2}}}
+\def\chXFlatm#1{\chXFlatOneParam{#1}{m}}
+\def\chXFlatPlus#1{\chXFlatOneParam{#1}{+}}
+\def\chXFlatSus#1{\chXFlatOneParam{#1}{sus}}
+\def\chXFlatDim#1{\chXFlatOneParam{#1}{\chDim}}
+\def\chXFlatMaj#1{\chXFlatOneParam{#1}{\chMaj}}
+
+
+\def\chXFlatOneParamUpper#1#2{\chXOneParamUpper{#1}{\chFlat\kern 0.2ex\chFontIdx #2}}
+\def\chXFlatSix#1{\chXFlatOneParamUpper{#1}{6}}
+\def\chXFlatSeven#1{\chXFlatOneParamUpper{#1}{7}}
+\def\chXFlatNine#1{\chXFlatOneParamUpper{#1}{9}}
+\def\chXFlatNineFlat#1{\chXFlatOneParamUpper{#1}{9\chFlat}}
+
+\def\chXFlatTwoParams#1#2#3{\chBase{#1\lower-1.1ex\hbox{\chFlat}\kern-0.3em\hbox{\chFontRm #2}\lower-1ex\hbox{\chFontIdx #3}}}
+\def\chXFlatmSeven#1{\chXFlatTwoParams{#1}{m}{7}}
+\def\chXFlatmSix#1{\chXFlatTwoParams{#1}{m}{6}}
+\def\chXFlatmFiveFlat#1{\chXFlatTwoParams{#1}{m}{5\chFlat}}
+\def\chXFlatSusSeven#1{\chXFlatTwoParams{#1}{sus}{7}}
+
+\def\chXFlatmSevenFiveFlat#1{\chBase{#1\lower-1.1ex\hbox{\chFlat}\kern-0.3em{\chFontRm m\lower0.5ex\vbox{\baselineskip=1ex\hbox{\chFontIdx 7}\hbox{\chFontIdx 5\chFlat}}}}}
+
+%
+% Macros for chords with sharp
+% it means Cs, Fs
+%
+\def\chXSharp#1{\chXOneParamUpper{#1}{\chSharp}}
+
+\def\chXSharpOneParam#1#2{\chBase{#1\lower-1.4ex\hbox{\chSharp}\kern-0.3em\hbox{\chFontRm #2}}}
+\def\chXSharpm#1{\chXSharpOneParam{#1}{m}}
+\def\chXSharpPlus#1{\chXSharpOneParam{#1}{+}}
+\def\chXSharpSus#1{\chXSharpOneParam{#1}{sus}}
+\def\chXSharpDim#1{\chXSharpOneParam{#1}{\chDim}}
+\def\chXSharpMaj#1{\chXSharpOneParam{#1}{\chMaj}}
+
+
+\def\chXSharpOneParamUpper#1#2{\chXOneParamUpper{#1}{\chFontIdx\chSharp\kern 0.2ex#2}}
+\def\chXSharpSix#1{\chXSharpOneParamUpper{#1}{6}}
+\def\chXSharpSeven#1{\chXSharpOneParamUpper{#1}{7}}
+\def\chXSharpNine#1{\chXSharpOneParamUpper{#1}{9}}
+\def\chXSharpNineFlat#1{\chXSharpOneParamUpper{#1}{9\chFlat}}
+
+\def\chXSharpTwoParams#1#2#3{\chBase{#1\lower-1.4ex\hbox{\chSharp}\kern-0.3em\hbox{\chFontRm #2}\lower-1ex\hbox{\chFontIdx #3}}}
+\def\chXSharpmSeven#1{\chXSharpTwoParams{#1}{m}{7}}
+\def\chXSharpmSix#1{\chXSharpTwoParams{#1}{m}{6}}
+\def\chXSharpmFiveFlat#1{\chXSharpTwoParams{#1}{m}{5\chFlat}}
+\def\chXSharpSusSeven#1{\chXSharpTwoParams{#1}{sus}{7}}
+
+\def\chXSharpmSevenFiveFlat#1{\chBase{#1\lower-1.4ex\hbox{\chSharp}\kern-0.3em{\chFontRm m\lower0.5ex\vbox{\baselineskip=1ex\hbox{\chFontIdx 7}\hbox{\chFontIdx 5\chFlat}}}}}

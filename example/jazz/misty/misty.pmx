@@ -1,0 +1,155 @@
+%----------------%
+%
+% misty.pmx
+%
+% Created at: 2012-03-18
+% Author: Ondrej Fafejta <fafejtao@gmail.com>
+%----------------%
+---
+\input musixtex
+\input pmx
+
+\input chords     % default chords macro
+%\input chordsCZ     % czech chords macro B -> H, Bf -> B
+
+% better bars numbering
+\def\writebarno{\llap{\tenrm\the\barno\barnoadd}}
+\def\raisebarno{2\internote}
+\def\shiftbarno{1.3\Interligne}
+
+
+\def\raisevolta{8\internote} % change volta offset (default is 4\internote)
+---
+%
+% nv,noinst,mtrnuml,mtrdenl,mtrnmp,mtrdnp,xmtrnum0,isig,
+   1      1       4       4      4      4        2    -3
+%
+% npages,nsyst,musicsize,fracindent
+       1     6        16       0
+
+t
+./
+\\\stafftopmarg12\Interligne\relax\
+%\\\staffbotmarg12\Interligne\relax\
+Tc99
+Erroll Garner
+Tt
+Misty
+Ar
+K-2+0
+
+%
+% Bar 0
+%
+b44 g /
+
+%
+% Bar 1
+%
+m4400
+Rl \ch.Efmaj.\ r2b \ch.Ef6.\ r2b //
+d24d [ b8 c ] /
+
+%
+% Bar 2
+%
+\ch.Bfm7.\ [ d84f c+ c c ] \ch.Ef7.\ [ c b g e ] /
+
+%
+% Bar 3
+%
+\ch.Afmaj.\ c24 \ch.Af6.\ r4x3 g a  c4x3 e g /
+
+%
+% Bar 4
+%
+\ch.Afm7.\ [ b84 b b a ] \ch.Cs7.\ b4d a8 /
+
+%
+% Bar 5
+%
+\ch.Gm7.\ ( g44 g4x3 ) a b \ch.Cm7.\ ( e4- ex3 ) f g /
+
+%
+% Bar 6
+%
+\ch.Fm7.\ a84 c4- c8 \ch.Bf7.\ d2x3 e f /
+
+%
+% Bar 7
+%
+V1
+g0 s //
+\ch.G7.\ r2b \ch.C7.\ r2b /
+
+%
+% Bar 8
+%
+\ch.Fm7.\ g2 s \ch.Bf7.\ r4 [ b8 g ] Rr /
+
+%
+% Bar 9
+%
+V2x
+e04 //
+\ch.Efmaj.\ r2b \ch.Fm7.\ r2b /
+
+%
+% Bar 10
+%
+\ch.Ef.\ r2x3 e44 f \ch.Fm.\ g2x3 b c Rd /
+
+%
+% Bar 11
+%
+Vb
+\ch.Bfm.\ [ d85f d d  d s ] \ch.F9f.\ d2 s s /
+
+%
+% Bar 12
+%
+\ch.Bfm7.\ d45 s [ d8f e ] \ch.Ef9f.\ ff2x3 e d /
+
+%
+% Bar 13
+%
+\ch.Afmaj.\ [ c85 c c c s ] \ch.Csmaj.\ c2 s /
+
+%
+% Bar 14
+%
+\ch.Afmaj.\ r2x3 e44 f a2x3 b c /
+
+%
+% Bar 15
+%
+\ch.Am7.\ [ d85 d d c ] \ch.D7.\ d2 s /
+
+%
+% Bar 16
+%
+\ch.Cm7.\ [ d85 s d d c ] \ch.F7.\ f2x3 d c /
+
+%
+% Bar 17
+%
+b04 s //
+\ch.Gm7.\ r2b \ch.C7.\ r2b /
+
+%
+% Bar 18
+%
+\ch.Fm.\ b24 s \ch.Bf7.\ r4 [ b8 g ] Rd /
+
+%
+% Bar 19
+%
+V3
+e04 //
+\ch.Efmaj.\ r2b \ch.C7.\ r2b /
+
+%
+% Bar 20
+%
+r0-1 //
+\ch.Fm7.\ r2b \ch.Bf7.\ r2b /

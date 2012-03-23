@@ -1,0 +1,112 @@
+%----------------%
+%
+% aj_co_to_hlasaju.pmx
+%
+% created at: 2011-11-18
+% Autor: Ondrej Fafejta
+%----------------%
+---
+\input musixtex   % These commands are necessary
+\input pmx        % because pmx.tex MUST be \input
+\input musixlyr   % before musixlyr.tex!
+
+%\input chordsCZ     % chords input czech - B is displayed as H, Bf is displayed as B
+\input chords     % chords default - B -> B, Bf -> Bf
+
+\let\BM\beginmel % For brevity within the subsequent
+\let\EM\endmel   % music coding recommended
+
+\def\verseNum#1{\llap{\sl#1 }}
+
+\setlyrics{V1}
+{\verseNum{1.}Aj, co to hl\'a-sa-j\'u
+u n\'as v~d\v e-di-n\v e?
+U\v z sa to roz-n\'es-lo v~ce-l\'ej do-li-n\v e.
+Zro-di-lo sa v~Bet-l\'e-m\v e
+Bo-\v z\'\i{} d\'\i{}t-ko na se-n\v e,
+Ve-li-k\'y Me-si-\'a\v s, Vy-ku-pi-tel n\'a\v s.}
+
+\assignlyrics{1}{V1}
+%\assignlyrics{2}{text}\lyrmodealter2
+% posuneme text vertikalne
+%\lyrraise{1}{-2\internote}
+
+% better bars numbering
+\def\writebarno{\llap{\tenrm\the\barno\barnoadd}}
+\def\raisebarno{2\internote}
+\def\shiftbarno{1.3\Interligne}
+
+% make a text that starts after the last system
+\def\verses{
+\centerline{
+ \vbox{ 
+  \hbox{\verseNum{2.}K~Betl\'emu cesta je od n\'as dalek\'a,}
+  \hbox{ale m\v na mal\'eho nijak nelek\'a.}
+  \hbox{Obuju si papu\v cky, budu \v slapat tichu\v cky}
+  \hbox{dalek\'ym chodn\'\i{}\v ckem tam, za Je\v z\'\i{}\v skem}
+ }
+}
+\vskip1cm
+\centerline{
+ \vbox{
+  \hbox{\verseNum{3.}V\v cera mn\v e sl\'ubili na\v si sta\v re\v cek,}
+  \hbox{\v ze mn\v e pro\v n zrobij\'u p\v ekn\'y hrk\'a\v cek.}
+  \hbox{Sta\v renka d\'a jabl\'\i{}\v cka pro Bo\v z\'\i{}ho syne\v cka:}
+  \hbox{To\v t m\'a\v s aj krupi\v cky, di\v ta malu\v ck\'y.}
+ }
+}
+} \
+
+% add space between lowest staff and foot line
+% and put the text in it:
+\let\Endpiecesav\Endpiece\
+\def\Endpiece{\let\Endpiece\Endpiecesav\Endpiece\vskip 1.5cm\verses}\
+
+---
+%
+% nv,noinst,mtrnuml,mtrdenl,mtrnmp,mtrdnp,xmtrnum0,isig,
+   1      1       2     4      2      4        0    -1
+%
+% npages,nsyst,musicsize,fracindent
+       1     2        16       0
+
+t
+./
+\\centerline{\bigtype Aj, co to hl\'asaj\'u}\
+\\vskip0.5cm\
+\\line{M\'\i{}rn\v e\hfill \sl Slov\'acko}\
+\\vskip.8cm\
+\\\stafftopmarg10\Interligne\relax\
+\\\staffbotmarg8\Interligne\relax\
+
+%
+% bar 1-4
+%
+Ar
+%K-2+2
+\ch.F.\ f84a a c4- | f8a a c4 | 
+\ch.C7.\ c15a b8da aa g | \ch.F.\ f4d r8 /
+
+%
+% bar 5-8
+%
+\ch.C.\ g84a g g4 | c8a g g4 |
+\ch.G7.\ g14a f8da ea d | \ch.C.\ c4d \ch.C7.\ r8 /
+
+%
+% bar 9-12
+%
+\ch.F.\ c85a ca da c | \ch.Gm.\ ca ba b4 |
+\ch.C7.\ b8a ba ca b | \ch.F.\ b8a a a4 /
+
+%
+% bar 13-14
+%
+\ch.Dm.\ f84a f f4 | \ch.Bf.\ f8a d+ d4 /
+
+%
+% bar 15-16
+%
+m3434
+\ch.Gm.\ c8a b \ch.F.\ a4 \ch.C7.\ g |
+\ch.F.\ f2d /

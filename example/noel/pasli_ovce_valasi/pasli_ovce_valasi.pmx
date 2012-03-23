@@ -1,0 +1,84 @@
+%----------------%
+%
+% pasli_ovce_valasi.pmx 
+%
+% created at: 2011-01-06
+% Author: Ondrej Fafejta <fafejtao@gmail.com>
+%----------------%
+---
+\input musixtex   % These commands are necessary
+\input pmx        % because pmx.tex MUST be \input
+\input musixlyr   % before musixlyr.tex!
+
+\input chords     % default chords macro
+%\input chordsCZ     % czech chords macro B -> H, Bf -> B
+
+\def\verseNum#1{\llap{\sl#1}}
+
+%
+% lyrics
+%
+% The space after \verseNumber{x} is mandatory.
+%
+\setlyrics{v1}
+{\verseNum{1.} P\'a-sli ov-ce Va-la-\v si, p\v ri be-tl\'em-sk\'em sa-la-\v si.}
+
+\setlyrics{v2}
+{\verseNum{2.} An-d\v el se jim u-k\'a-zal, do Be-tl\'e-ma j\'\i{}t k\'a-zal.}
+
+\setlyrics{v3}
+{\verseNum{3.} Vsta\v n-te ho-re a cho\v d-te, P\'a-na Kri-sta naj-de-te.}
+
+\setlyrics{v4}
+{\verseNum{4.} On tam le-\v z\'\i{} v~je-sli\v c-k\'ach o-vi-nu-t\'y v~plen-\v ci\v c-k\'ach.}
+
+\setlyrics{ref}
+{Haj-dom, haj-dom ty-dli dom, haj-dom, haj-dom ty-dli dom.}
+
+\assignlyrics{1}{v1,v2,v3,v4}
+
+% better bars numbering
+\def\writebarno{\llap{\tenrm\the\barno\barnoadd}}% % REMOVE
+\def\raisebarno{2\internote}% % REMOVE
+\def\shiftbarno{1.3\Interligne}% % REMOVE
+
+---
+%
+%
+%
+% nv,noinst,mtrnuml,mtrdenl,mtrnmp,mtrdnp,xmtrnum0,isig,
+   1      1       2       4      2      4        0    0
+%
+% npages,nsyst,musicsize,fracindent
+       1     2        16       0
+
+t
+./
+\\centerline{\bigtype P\'asli ovce Vala\v si}\
+\\vskip8mm\
+\\interstaff{22}\
+\\\stafftopmarg14\Interligne\relax\
+\\\staffbotmarg8\Interligne\relax\
+%Tt
+%P\'asli ovce vala\v si
+%
+% Bar 1-2
+%
+% added hidden space for verse number.
+\llyr\lyroffset{-3}\lyr\
+\ch.C.\ [ c85 g ] [ g f ] | [ e f ] g4 /
+
+%
+% Bar 3-4
+%
+[ c85 g ] [ g f ] | \ch.G7.\ [ e d ] \ch.C.\ c4 /
+
+%
+% Bar 5-6
+%
+\assignlyricshere{ref}\ \ch.C.\ [ c84 e ] [ e f ] | [ e d ] e4 /
+
+%
+% Bar 7-8
+%
+[ c84 e ] [ e f ] | \ch.G7.\ [ e d ] \ch.C.\ c4 /

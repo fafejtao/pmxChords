@@ -1,0 +1,93 @@
+%----------------%
+%
+% schema.pmx
+%
+% Created at: 2012-03-19
+% Author: Ondrej Fafejta <fafejtao@gmail.com>
+%----------------%
+---
+\input musixtex
+\input pmx
+
+\input chords     % default chords macro
+%\input chordsCZ     % czech chords macro B -> H, Bf -> B
+
+\nobarnumbers  % disable bar numbers
+
+---
+%
+% nv,noinst,mtrnuml,mtrdenl,mtrnmp,mtrdnp,xmtrnum0,isig,
+   2      1       4       4      4      4        0    0
+%
+% npages,nsyst,musicsize,fracindent
+       1     1        16       0
+
+bt
+./
+\\\stafftopmarg12\Interligne\relax\
+%\\\staffbotmarg12\Interligne\relax\
+Ar
+%K-3+1
+%K+3-1
+
+%K+1+2
+%K-1-2
+
+%K-2+3
+%K+2-3
+
+%K+2+4
+%K-2-4
+
+%
+% Bar 1
+%
+d22 g /
+\ch.Dm7.\ c24 zf \ch.G7.\ b23 zf+ /
+
+%
+% Bar 2
+%
+e22 a /
+\ch.Em7.\ d24 zg \ch.A7.\ cs24 zg+ /
+
+%
+% Bar 3
+%
+d22 g /
+\ch.Dm7.\ c24 zf \ch.G7.\ b23 zf+ /
+
+%
+% Bar 4
+%
+c02 zc+ /
+\ch.Cmaj.\ b23 ze \ch.C6.\ a- ze+ /
+
+%
+% again in other position
+%
+
+%
+% Bar 5
+%
+Rd d23 g- /
+\ch.Dm7.\ f24 zc+ \ch.G7.\ f24 zb /
+
+%
+% Bar 6
+%
+e23 a- /
+\ch.Em7.\ g24 zd+ \ch.A7.\ g24 zcs /
+
+%
+% Bar 7
+%
+d23 g- /
+\ch.Dm7.\ f24 zc+ \ch.G7.\ f24 zb /
+
+%
+% Bar 8
+%
+c02 zc+ /
+\ch.Cmaj.\ e24 zb+ \ch.C6.\ e- za /
+
