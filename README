@@ -1,7 +1,22 @@
 2012-03-16
 Author: Ondrej Fafejta
 
-I. Installation
+The project extends preprocesor musixtex (PMX) to type chords over notes.
+New TeX macro is created to type chords.
+It is possible to use perl script bin/chords_transpose.pl to transpose chords to required key signature.
+
+The project is opensource
+LICENSE: GPLv2+
+
+I. project structure
+
+bin      - contains chords transposition scripts and other useful script.
+doc      - contains reference table chords and generated examples in pdf
+example  - contains some source example (.pmx files)
+texmf    - contains chords macros - two variants global and for Czech country.
+work     - contains generator chords macros and ref tables.
+
+II. Installation
 
 1. pre-requisite
 I suppose you have installed musixtex, pmx, musixflx, musixlyr.
@@ -15,7 +30,7 @@ After copy the files you must call texhash command.
 
 You can use install.sh script.
 
-3. try type some example notes. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
+3. try type the noel from example. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
 
 $ cd example/noel/aj_co_to_hlasaju
 $ pmx_dvi.sh aj_co_to_hlasaju
@@ -36,7 +51,6 @@ The noel is in transposed signature D-major.
 The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.
 
 
-
 I will try to describe how to use scripts bin/pmx_dvi.sh or bin/pmx_dvi.sh.
 
 The script file require one parameter. File name without .pmx suffix.
@@ -46,13 +60,4 @@ c) musixtex three steps is called
 - tex
 - musixflx
 - tex
-
-
-II. project structure
-
-bin      - contains chords transposition scripts and other useful script.
-doc      - contains reference table chords and generated examples in pdf
-example  - contains some source example (.pmx files)
-texmf    - contains chords macros - two variants global and for Czech country.
-work     - contains generator chords macros and ref tables.
 
