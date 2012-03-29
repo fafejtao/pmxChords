@@ -10,9 +10,9 @@ LICENSE: GPLv2+
 
 I. project structure
 
-bin      - contains chords transposition scripts and other useful script.
-doc      - contains reference table chords and generated examples in pdf
-example  - contains some source example (.pmx files)
+scripts  - contains chords transposition scripts and other useful script.
+doc      - contains reference table chords
+example  - contains some source example (.pmx files) and generated pdf files.
 texmf    - contains chords macros - two variants global and for Czech country.
 work     - contains generator chords macros and ref tables.
 
@@ -25,7 +25,7 @@ http://icking-music-archive.org/software/indexmt6.html
 
 2. install chords macros
 
-Copy files texmf/tex/chords*.tex to your home texmf/tex dir.
+Copy files texmf/chords*.tex to your home ~/texmf/tex/musixtex/pmxChords dir.
 After copy the files you must call texhash command.
 
 You can use install.sh script.
