@@ -3,7 +3,7 @@ Author: Ondrej Fafejta
 
 The project extends preprocesor musixtex (PMX) to type chords over notes.
 New TeX macro is created to type chords.
-It is possible to use perl script bin/chords_transpose.pl to transpose chords to required key signature.
+It is possible to use perl script scripts/chords_transpose.pl to transpose chords to required key signature.
 
 The project is opensource
 LICENSE: GPLv2+
@@ -51,7 +51,7 @@ The noel is in transposed signature D-major.
 The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.
 
 
-I will try to describe how to use scripts bin/pmx_dvi.sh or bin/pmx_dvi.sh.
+I will try to describe how to use scripts scripts/pmx_dvi.sh or scripts/pmx_dvi.sh.
 
 The script file require one parameter. File name without .pmx suffix.
 a) chords transposition script chords_transpose.pl is called.
