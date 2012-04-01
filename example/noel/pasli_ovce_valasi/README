@@ -1,0 +1,6 @@
+This noel shows how to write verse number in musixlyr.
+
+Special hidden space is prepared for verse number.
+See the first BAR in pmx file
+
+\llyr\lyroffset{-3}\lyr\
