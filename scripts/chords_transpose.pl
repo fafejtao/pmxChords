@@ -9,7 +9,7 @@ while ($line = <STDIN>) {
    chomp;
    if(!defined $iSig) {
        # obtain input signature
-       if($line =~ m/^ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *(\-{0,1}[0-9]+) *$/){
+       if($line =~ m/^ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *[0-9]+ *([\+\-]{0,1}[0-9]+) *$/){
 	   $iSig = int($1);
 #       print "% TEST: Signature matches: input signature == ".$iSig."\n";
        }
