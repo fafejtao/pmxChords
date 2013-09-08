@@ -16,17 +16,20 @@
 if [ ! $# -eq 2 ] ; then
     echo "Usage:";
     echo "$0 dvi|pdf file_prefix";
-    echo -e "\n dvi|pdf determines destination output format. For DVI is used tex command. For PDF is used pdftex command."
+    echo -e "\n dvi|pdf determines destination output format. For DVI is used etex command. For PDF is used pdfetex command."
     echo " file_prefix is file name without suffix .tex"
     exit -1;
 fi
 
-TEX_CMD=pdftex # output in pdf
+
+#TEX_CMD=pdfcsplain # output in pdf
+TEX_CMD=pdfetex # output in pdf
 if [ $1 = "dvi" ] ; then
-    TEX_CMD=tex
+#    TEX_CMD=csplain
+    TEX_CMD=etex
 fi
 
-file_prefix=$2;
+file_prefix=`basename $2 .tex`;
 
 
 if [ ! -f $file_prefix.tex ] ; then
