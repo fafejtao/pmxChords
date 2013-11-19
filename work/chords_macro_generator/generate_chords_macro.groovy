@@ -13,7 +13,7 @@ variants = [
     ["", ""],
     ["m","m"],
     ["+","Plus"],
-    ["sus", "Sus"],
+    ["4", "Sus"],
     ["dim","Dim"],
     ["maj","Maj"],
     ["6", "Six"],
@@ -23,7 +23,7 @@ variants = [
     ["m7","mSeven"],
     ["m6", "mSix"],
     ["m5f", "mFiveFlat"],
-    ["sus7","SusSeven"],
+    ["47","SusSeven"],
     ["m75f","mSevenFiveFlat"]
 ];
 
