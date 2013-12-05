@@ -1,9 +1,10 @@
 2012-03-16
-Author: Ondrej Fafejta
+Author: Ondrej Fafejta <fafejtao@gmail.com>
+        https://github.com/fafejtao/pmxChords
 
 The project extends preprocesor musixtex (PMX) to type chords over notes.
 New TeX macro is created to type chords.
-It is possible to use perl script scripts/chords_transpose.pl to transpose chords to required key signature.
+Use pmxchords.lua script which transpose chords and call pmxab.
 
 The project is opensource
 LICENSE: GPLv2+
@@ -25,12 +26,20 @@ http://icking-music-archive.org/software/indexmt6.html
 
 2. install chords macros
 
-Copy files tex/chords*.tex to your home ~/texmf/tex/musixtex/pmxChords dir.
+Copy files tex/chords*.tex to your home ~/texmf/tex/generic/pmxChords dir.
 After copy the files you must call texhash command.
 
-You can use install.sh script.
+3. install pmxchords.lua script
 
-3. try type the noel from example. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
+pmxchords.lua require class ChordsTr.lua
+It is require to copy ChordsTr into lua package.path directory.
+You can create you own lua package directory:
+- create lua folder in your home directory
+- set up your LUA_PATH property. Full path is required - do not use ~/lua ! e.g. add line into you .bashrc file.
+  export LUA_PATH="/home/fafi/lua/?.lua;;"
+- copy ChordsTr.lua into ~/lua directory
+
+4. try type the noel from example. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
 
 $ cd example/noel/aj_co_to_hlasaju
 $ pmx_dvi.sh aj_co_to_hlasaju
@@ -49,15 +58,3 @@ $ pmx_dvi.sh aj_co_to_hlasaju
 
 The noel is in transposed signature D-major.
 The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.
-
-
-I will try to describe how to use scripts scripts/pmx_dvi.sh or scripts/pmx_dvi.sh.
-
-The script file require one parameter. File name without .pmx suffix.
-a) chords transposition script chords_transpose.pl is called.
-b) pmx preprocesor is called (the .tex file is created)
-c) musixtex three steps is called
-- tex
-- musixflx
-- tex
-
