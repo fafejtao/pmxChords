@@ -55,7 +55,7 @@ function ChordsTr.__createTransposeMap(sigDiff)
    -- generate transpose map of base chords ...
    local res = {}
    local i 
-   for i = 0, 11, 1 do
+   for i = 0, size - 1, 1 do
 	  local key = ChordsTr.BASE_CHORDS_ARR[i]
       local trIdx = (i + halfTones) % size;
 	  res[key] = ChordsTr.BASE_CHORDS_ARR[trIdx]
@@ -80,8 +80,8 @@ function ChordsTr:lineTranspose(line)
 	  i = i + 3 -- move after \ch.
 	  trLine = trLine .. string.sub(line, pos, i)  -- append non chord string into result
 	  pos = string.find(line, ChordsTr.CHORDS_END, i)
-	  if pos == nil then                        -- TODO check correctly end of chords ...
-		 print("End of chords was not found!")
+	  if pos == nil then                        -- TODO check correctly end of chords ... e.g. check wrong line (first chord is not finished correctly): \ch.C. c \ch.G7.\ b 
+		 io.stderr:write("End of chords was not found!\n")
 		 os.exit(-1)
 	  end
 	  chord = string.sub(line, i + 1, pos - 1)

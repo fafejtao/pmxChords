@@ -1,0 +1,58 @@
+2012-03-16
+Author: Ondrej Fafejta <fafejtao@gmail.com>
+        https://github.com/fafejtao/pmxChords
+
+The project extends preprocesor musixtex (PMX) to type chords over notes.
+New TeX macro is created to type chords.
+Use pmxchords.lua script which transpose chords and call pmxab.
+
+The project is opensource
+LICENSE: GPLv2+
+
+I. project structure
+
+doc      - contains reference table chords and some examples
+tex      - contains chords macros - two variants global and for Czech country.
+
+II. Installation
+
+1. pre-requisite
+I suppose you have installed musixtex, pmx, musixflx, musixlyr.
+see
+http://icking-music-archive.org/software/indexmt6.html
+
+2. install chords macros
+
+Copy files tex/chords*.tex to your home ~/texmf/tex/generic/pmxChords dir.
+Than call texhash command.
+
+3. install pmxchords.lua script
+
+pmxchords.lua require class ChordsTr.lua
+It is require to copy ChordsTr into lua package.path directory.
+You can create your own lua package directory:
+- create lua folder in your home directory
+- set up your LUA_PATH property. Full path is required - do not use ~/lua !
+  e.g. add following line into you .bashrc file.
+  export LUA_PATH="/home/[user]/lua/?.lua;;"
+- copy ChordsTr.lua into ~/lua directory
+
+4. try type the noel from example. I recommend to use pmx2pdf script (at least version 0.3.0) with parameter -c.
+
+$ cd example/noel/aj_co_to_hlasaju
+$ pmx2pdf -c -p aj_co_to_hlasaju
+
+The noel is in original signature F-major.
+Try to edit file aj_co_to_hlasaju.pmx and modify lines
+
+\input chordsCZ     % chords input czech - B is displayed as H, Bf is displayed as B
+%\input chords     % chords default - B -> B, Bf -> Bf
+
+Next uncomment line
+K-2+2
+
+Call again 
+$ pmx2pdf -c -p aj_co_to_hlasaju
+
+The noel is in transposed signature D-major.
+The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.

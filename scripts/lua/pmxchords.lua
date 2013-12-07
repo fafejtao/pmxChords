@@ -1,5 +1,10 @@
 #!/usr/bin/env texlua
+--
+-- global constants
+--
 VERSION = "0.9"
+FILE_SUFFIX="_chtr"
+PMX_CMD="pmxab"
 
 --[[
    pmxchords.lua: transpose chords (\ch.C.\) and process pmxab
@@ -31,9 +36,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 function usage()
   print("Usage:  [texlua] pmxchords.lua  basename[.pmx] ")
-  print("     1. transpose chords into new file basename_chtr.pmx")
-  print("     2. call pmxab on transposed file basename_chtr.pmx")
-  print("     3. rename basename_chtr.tex to basename.tex")
+  print("     1. transpose chords into new file basename"..FILE_SUFFIX..".pmx")
+  print("     2. call pmxab on transposed file basename"..FILE_SUFFIX..".pmx")
+  print("     3. rename basename"..FILE_SUFFIX..".tex to basename.tex")
 end
 
 function whoami ()
@@ -48,14 +53,8 @@ end
 
 require "ChordsTr" -- be careful file ChordsTr.lua must be on package.path
 
---
--- global constants
---
-FILE_SUFFIX="_chtr"
-PMX_CMD="pmxab"
-
 function parseInputSignature(line)
-   -- parse input signature from pmx digits line. Only one line digits format are supported!
+   -- parse input signature from pmx digits line. Only one line digits format is supported!
    -- e.g.
    --    1      1       2     4      2      4        0    -1
    -- signature is -1 : F major
@@ -143,3 +142,4 @@ if (pmxResCode ~= 0 ) then
 end
 
 os.rename(outputBaseName..".tex", baseName..".tex")
+os.remove(outputFileName) -- remove temporary file
