@@ -142,4 +142,8 @@ if (pmxResCode ~= 0 ) then
 end
 
 os.rename(outputBaseName..".tex", baseName..".tex")
-os.remove(outputFileName) -- remove temporary file
+
+-- remove temporary files
+os.remove(outputFileName)
+os.remove(outputBaseName..".pml")
+os.remove("pmxaerr.dat")
