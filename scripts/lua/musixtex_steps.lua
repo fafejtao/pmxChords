@@ -1,10 +1,18 @@
 #!/usr/bin/env texlua
+
+function getEnvVariable(name, defaultValue) 
+   local res = os.getenv(name)
+   if (res == nil) then
+      return defaultValue;
+   end
+   return res
+end
 --
 -- global constants
 --
 VERSION = "0.9"
-TEX_CMD="etex"
-PDFTEX_CMD="pdfetex"
+TEX_CMD =    getEnvVariable("MUSIXTEX_STEPS_TEX", "etex")
+PDFTEX_CMD = getEnvVariable("MUSIXTEX_STEPS_PDFTEX", "pdfetex") 
 
 --[[
    musixtex_steps.lua: Makes three pass musixtex steps. e.g. tex / musixflx / tex
@@ -92,6 +100,7 @@ repeat
       baseFileName = getBaseFileName(this_arg)
       clearFiles(baseFileName)
 
+--      print("Call: " .. tex) -- debug
       if(os.execute(tex .. " " .. baseFileName ) == 0 and
 	 os.execute(musixflx .. " " .. baseFileName ) == 0 and
 	 os.execute(tex .. " " .. baseFileName ) == 0) then
