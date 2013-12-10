@@ -2,22 +2,28 @@
 Author: Ondrej Fafejta <fafejtao@gmail.com>
         https://github.com/fafejtao/pmxChords
 
-The project extends preprocesor musixtex (PMX) to type chords over notes.
-New TeX macro is created to type chords.
-Use pmxchords.lua script which transpose chords and call pmxab.
+Pmxchords project extends preprocesor musixtex (PMX) to type chords over the notes.
+PMX is preprocesor of musixtex and pmxchords is preprocesor of PMX.
+Chords syntax is as inline tex command in .pmx file.
+e.g.
+\ch.C.\ c44 e \ch.G7.\ d2 | \ch.C.\ c r /
 
-The project is opensource
-LICENSE: GPLv2+
+PMX can transpose notes to required signature.
+Script pmxchords.lua transposes chords to required signature and then call pmxab to generate .tex file.
+So user should use pmxchords.lua instead of pmxab to transpose chords and make .tex file.
 
-I. project structure
+The project contains musixtex_steps.lua script which makes three musixtex steps.
+e.g. tex / musixflx / tex
+musixtex_steps.lua is configurable. Some people want to use different command than etex or pdfetex.
+It is configurable by environment variable.
+For example for czech country I recomend to use csplain and pdfcsplain.
 
-scripts  - contains chords transposition scripts and other useful script.
-doc      - contains reference table chords
-example  - contains some source example (.pmx files) and generated pdf files.
-tex      - contains chords macros - two variants global and for Czech country.
-work     - contains generator chords macros and ref tables.
+export MUSIXTEX_STEPS_TEX="csplain"         # if not set - default value is etex
+export MUSIXTEX_STEPS_PDFTEX="pdfcsplain"   # if not set - default value is pdfetex
 
-II. Installation
+
+
+Installation
 
 1. pre-requisite
 I suppose you have installed musixtex, pmx, musixflx, musixlyr.
@@ -31,18 +37,24 @@ After copy the files you must call texhash command.
 
 3. install pmxchords.lua script
 
-pmxchords.lua require class ChordsTr.lua
-It is require to copy ChordsTr into lua package.path directory.
-You can create you own lua package directory:
+pmxchords.lua requires class ChordsTr.lua
+
+It is required to copy ChordsTr into lua package.path directory.
+You can create your own lua package directory:
 - create lua folder in your home directory
-- set up your LUA_PATH property. Full path is required - do not use ~/lua ! e.g. add line into you .bashrc file.
-  export LUA_PATH="/home/fafi/lua/?.lua;;"
+- set up your LUA_PATH environment variable. Full path is required - do not use ~/lua ! 
+  e.g. add line into you .bashrc file.
+  export LUA_PATH="/home/[user]/lua/?.lua;;"
 - copy ChordsTr.lua into ~/lua directory
 
-4. try type the noel from example. I recommend to use prepared script pmx_dvi.sh or pmx_pdf.sh.
+
+
+
+Try type the noel from example.
 
 $ cd example/noel/aj_co_to_hlasaju
-$ pmx_dvi.sh aj_co_to_hlasaju
+$ pmxchords.lua aj_co_to_hlasaju
+$ musixtex_steps.lua aj_co_to_hlasaju
 
 The noel is in original signature F-major.
 Try to edit file aj_co_to_hlasaju.pmx and modify lines
@@ -53,8 +65,8 @@ Try to edit file aj_co_to_hlasaju.pmx and modify lines
 Next uncomment line
 K-2+2
 
-Call again 
-$ pmx_dvi.sh aj_co_to_hlasaju
+
+Call again pmxchords.lua and musixtex_steps.lua
 
 The noel is in transposed signature D-major.
 The chords is in czech format. It means the bar number 13 contains chords Hmi instead of Bmi.
