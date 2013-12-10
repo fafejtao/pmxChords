@@ -4,3 +4,5 @@
 *.pml
 *.log
 pmxaerr.dat
+.gradle
+build
