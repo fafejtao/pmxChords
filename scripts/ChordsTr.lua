@@ -1,13 +1,19 @@
+--[[
+   (c) Copyright 2013 Ondrej Fafejta <fafejtao@gmail.com>
+       https://github.com/fafejtao/pmxChords
+]]--
 --
 -- Chords transposition class
 --
 ChordsTr = {}               -- the table representing the class, which will double as the metatable for the instances
 ChordsTr.__index = ChordsTr -- failed table lookups on the instances should fallback to the class table, to get methods
-setmetatable(ChordsTr, {
-  __call = function (cls, ...)
-    return cls.new(...)
-  end,
-})
+setmetatable(
+   ChordsTr, 
+   {
+      __call = function (cls, ...)
+	 return cls.new(...)
+      end,
+   })
 
 --
 -- global constants
@@ -49,16 +55,16 @@ function ChordsTr.__createTransposeMap(sigDiff)
    local size = 12
    local halfTones = (sigDiff * 7) % size
    if (halfTones < 0 ) then
-	  halfTones = halfTones + size
+      halfTones = halfTones + size
    end
    
    -- generate transpose map of base chords ...
    local res = {}
    local i 
    for i = 0, size - 1, 1 do
-	  local key = ChordsTr.BASE_CHORDS_ARR[i]
+      local key = ChordsTr.BASE_CHORDS_ARR[i]
       local trIdx = (i + halfTones) % size;
-	  res[key] = ChordsTr.BASE_CHORDS_ARR[trIdx]
+      res[key] = ChordsTr.BASE_CHORDS_ARR[trIdx]
    end
    return res
 end
@@ -72,20 +78,20 @@ function ChordsTr:lineTranspose(line)
    local pos = 0;
    local trLine = "" -- transposed line (result)
    while true do
-	  local i = string.find(line, ChordsTr.CHORDS_BEGIN, pos)
-	  if i == nil then 
-		 trLine = trLine .. string.sub(line, pos)
-		 break
-	  end
-	  i = i + 3 -- move after \ch.
-	  trLine = trLine .. string.sub(line, pos, i)  -- append non chord string into result
-	  pos = string.find(line, ChordsTr.CHORDS_END, i)
-	  if pos == nil then                        -- TODO check correctly end of chords ... e.g. check wrong line (first chord is not finished correctly): \ch.C. c \ch.G7.\ b 
-		 io.stderr:write("End of chords was not found!\n")
-		 os.exit(-1)
-	  end
-	  chord = string.sub(line, i + 1, pos - 1)
-	  trLine=trLine .. self:doTranspose(chord)
+      local i = string.find(line, ChordsTr.CHORDS_BEGIN, pos)
+      if i == nil then 
+	 trLine = trLine .. string.sub(line, pos)
+	 break
+      end
+      i = i + 3 -- move after \ch.
+      trLine = trLine .. string.sub(line, pos, i)  -- append non chord string into result
+      pos = string.find(line, ChordsTr.CHORDS_END, i)
+      if pos == nil then                        -- TODO check correctly end of chords ... e.g. check wrong line (first chord is not finished correctly): \ch.C. c \ch.G7.\ b 
+	 io.stderr:write("End of chords was not found!\n")
+	 os.exit(-1)
+      end
+      chord = string.sub(line, i + 1, pos - 1)
+      trLine=trLine .. self:doTranspose(chord)
    end
    return trLine
 end
@@ -104,13 +110,13 @@ end
 --
 function ChordsTr.splitChord(chord)
    if(chord.len == 1) then
-	  return chord, ""
+      return chord, ""
    end
    local secondChar = string.sub(chord, 2, 2)
    if (secondChar == 's' or secondChar == 'f' ) then
-	  return chord.sub(chord, 1, 2), chord.sub(chord, 3)
+      return chord.sub(chord, 1, 2), chord.sub(chord, 3)
    else
-	  return chord.sub(chord, 1, 1), chord.sub(chord, 2)
+      return chord.sub(chord, 1, 1), chord.sub(chord, 2)
    end
 end
 --
