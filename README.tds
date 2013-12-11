@@ -1,0 +1,20 @@
+2013-12-11
+Author: Ondrej Fafejta <fafejtao@gmail.com>
+Website: https://github.com/fafejtao/pmxChords
+
+Pmxchords extends the PMX preprocesor for musixtex to output chord
+notations over the notes. The syntax for chord symbols is as inline
+tex commands in the .pmx file. 
+e.g. \ch.C.\ c44 e \ch.G7.\ d2 | \ch.C.\ c r /
+
+PMX supports key transposition and the pmxchords.lua script is
+used to transpose chord symbols accordingly (and then call pmxab as
+usual to generate a .tex file). From version 0.3, the pmx2pdf script
+in the PMX package supports a -c option to use pmxchords (and then
+pmxab) as the preprocessor (rather than pmxab directly).
+
+For installation and usage, see the pmxchords-install document.
+
+pmxchords is licensed under the GPL version 2 or later.
+
+This README was edited by Bob Tennent (rdt@cs.queensu.ca).

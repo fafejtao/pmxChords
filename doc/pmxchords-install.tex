@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage[textwidth=6.5in,textheight=8.5in]{geometry}
+\usepackage[osf]{mathpazo}
+\PassOptionsToPackage{urlcolor=black,colorlinks}{hyperref}
+\RequirePackage{hyperref}
+\usepackage{xcolor}
+\newcommand{\myurl}[1]{\textcolor{blue}{\underline{\textcolor{black}{\url{#1}}}}}
+\newcommand{\pmxVersion}{2.7.0}
+\begin{document}
+\title{Installation of the CTAN pmxchords Distribution}
+\author{Bob Tennent\\
+\small\url{rdt@cs.queensu.ca}}
+\date{\today}
+\maketitle 
+\thispagestyle{empty}
+
+\section{Introduction}
+We assume that you have already installed a MusiXTeX distribution
+and PMX.
+Before trying to install pmxchords from CTAN, check whether your TeX distribution
+provides a package for pmxchords; this will be easier than doing it yourself.
+But if your TeX distribution
+doesn't have pmxchords (or doesn't have the most recent version), this distribution
+of pmxchords is very easy to install, though
+you may need to read the material on 
+installation of (La)TeX files in the 
+TeX FAQ\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html}},
+particularly
+the pages on 
+which tree to use\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=what-TDS}}
+and installing files\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=inst-wlcf}}.
+
+\section{Installing \texttt{pmxchords.tds.zip}}
+
+In this distribution of pmxchords, most of the files to be installed 
+(including macros, documentation, and a processing script) are in 
+\texttt{tex-archive/install/support/pmxchords.tds.zip} at CTAN.
+The file \verb|pmxchords.tds.zip| is a zipped TEXMF
+hierarchy; simply download it and unzip in the root folder/directory of whichever TEXMF tree
+you decide is most appropriate, likely a ``local'' or ``personal'' one.
+This should work with any TDS\footnote{%
+\myurl{http://www.tex.ac.uk/cgi-bin/texfaq2html?label=tds}}
+compliant TeX distribution, including MikTeX, TeXlive and teTeX.
+
+After unzipping the archive, update the filename database as necessary,
+for example, by executing \verb\texhash ~/texmf\ or 
+clicking the button labelled ``Refresh FNDB" in the MikTeX settings program.
+
+Documentation for pmxchords is installed under \verb\doc/generic/pmx\
+in the TEXMF tree.  
+
+\section{The Processing Script}
+
+The Lua script \verb\.../scripts/pmx/pmxchords.lua\ 
+transposes chord symbols in the \verb\pmx\ file as necessary
+and then calls \verb\pmxab\. 
+
+On a Unix-like system (with \texttt{texlua} installed), put a
+symbolic link \texttt{pmxchords} in any directory on the executable PATH as follows:
+\begin{list}{}{}
+\item \verb\ln -s <path to pmxchords.lua> pmxchords \
+\end{list}
+On Windows, you can \emph{either}
+copy the batch file
+\begin{list}{}{}
+\item \verb|Windows\pmxchords.bat| 
+\end{list}
+to a folder
+on the executable PATH \emph{or} add the folder
+\verb|Windows| to the executable PATH.
+
+\section{Testing}
+
+Copy \verb\doc/pmxchords/example/noel/aj_co_to_hlasaju/aj_co_to_hlasaju.pmx\ to a
+working directory and do
+\begin{list}{}{}\item
+\verb\pmxchords aj_co_to_hlasaju\
+\end{list}
+Then process the resulting \verb\aj_co_to_hlasaju.tex\ file as usual. The piece
+is in the key of F~major.  
+
+Uncomment the line
+\verb\K-2+2\ in the \verb\pmx\ file and repeat as above; the piece should
+now be typeset in D major, with appropriate chords. If the line
+\begin{list}{}{}\item
+\verb|\input chords|
+\end{list}
+in the source file is replaced by
+\begin{list}{}{}\item
+\verb|\input chordsCZ|
+\end{list}
+the chord symbols will be in Czech style (e.g., Hmi instead of Bmi).
+
+The macro calls for various chord symbols are displayed in the \verb|chordsRef|
+and \verb|chordsRefCZ| documents.
+
+\end{document}

@@ -1,0 +1,33 @@
+.TH pmxchords 1 "11 Dec 2013" "Version 2013-12-11" "pmxchords Manual Page"
+.SH NAME
+pmxchords \- This script processes pmx files with chord symbols, allowing for key transpositions
+.SH SYNOPSIS
+[ texlua ]
+.B pmxchords
+{
+.IR option
+|
+.IR jobname 
+[ .pmx ] 
+} ...
+.TP
+The default effect is to preprocess each pmx file so that chords are transposed as necessary, generating a temporary pmx file which is then processed by pmxab.  Finally the resulting tex file is renamed to have the original jobname.  The default filename for the temporary file is <jobname>_chtr.pmx.
+
+.SH OPTIONS
+.TP 8
+.B -v 
+output program name and version number, and quit
+.TP
+.B -h
+output usage summary and quit
+.TP
+.B -s 
+stop after first step (of producing a temporary pmx file with transposed chord symbols).
+
+
+.SH SEE ALSO
+pmx(1), musixtex(1)
+.SH AUTHORS 
+pmxchords was written by Ondrej Fafejta
+<fafejtao@gmail.com>. This manual page was written by Bob Tennent
+<rdt@cs.queensu.ca>.
