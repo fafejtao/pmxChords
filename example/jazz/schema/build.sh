@@ -29,14 +29,16 @@ echo "" > $dest_tex_file
 transposed_file=$file_prefix-trans
 for TP in "%" "K-3+1" "K+3-1" "K+1+2" "K-1-2" "K-2+3" "K+2-3" "K+2+4" "K-2-4"
 do
-# replace %K-3+1 to required transposition and call perl script for chord transposition
-sed -e "/^%K-3+1/c$TP" $pmx_file | chords_transpose.pl > $transposed_file.pmx
-# create tex file
-pmxab $transposed_file
+# replace %K-3+1 to required transposition and call lua script for chord transposition
+
+WORK_BASE_FILE=work
+WORK_FILE=${WORK_BASE_FILE}.pmx
+cat $pmx_file | sed -e "/^%K-3+1/c$TP" > $WORK_FILE
+pmxchords.lua $WORK_FILE
 
 # 
 # append each file to dest_tex_file
-sed -r "/\\\endmuflex|^\\\bye/d" $transposed_file.tex >> $dest_tex_file
+sed -r "/\\\endmuflex|^\\\bye/d" $WORK_BASE_FILE.tex >> $dest_tex_file
 
 done
 
@@ -50,7 +52,7 @@ echo "\bye" >> $dest_tex_file
 #
 # create PDF result
 
-musixtex_steps.sh pdf $dest_tex_file_prefix
+musixtex_steps.lua $dest_tex_file_prefix
 
 
 
