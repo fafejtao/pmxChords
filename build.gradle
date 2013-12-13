@@ -1,32 +1,23 @@
-def BUILD_DIR="build"
-def TDS_DIR="build/tds"
+def BUILD_DIR = "build"
+def TDS_DIR = "build/tds"
 def buildDir = new File(BUILD_DIR)
 
 task resources << {
-     if(buildDir.isDirectory()) {
-        println ("Deleting buildDirectory")
-	delete(buildDir)
-     }
-     buildDir.mkdirs()
-}
-
-
-//task hello(dependsOn: 'resources') << {
-task hello() << {
-    println 'Hello owrld'
-
-    def FileTree exampleTree = fileTree(dir: "example", include: "**/*.pmx")
-    exampleTree.each{ println (it) }
-}
-
-
-task makeExamples(dependsOn: 'resources') << {
-    copy { 
-    	 from "example"
-	 into BUILD_DIR+"/example"
-	 include "**/*.pmx,example/jazz/schema/*.pdf"
+    if (buildDir.isDirectory()) {
+        println("Deleting buildDirectory")
+        delete(buildDir)
     }
+    buildDir.mkdirs()
 }
+
+// TODO generate all examples in build time
+//task makeExamples(dependsOn: 'resources') << {
+//    copy {
+//        from "example"
+//        into BUILD_DIR + "/example"
+//        include "**/*.pmx,example/jazz/schema/*.pdf"
+//    }
+//}
 
 /*
 Name
@@ -102,44 +93,42 @@ doc/pmxchords/chordsRef.pdf
 doc/pmxchords/gpl-2.0.txt
 doc/pmxchords/pmxchords-install.tex
 */
-task makeTdsZip(dependsOn:'resources') << {
-    copy { 
-         from "example"
-         into TDS_DIR+"/doc/pmxchords/example"
-         include "**/*.pmx"
-		 include "example/jazz/schema/*.pdf"
-		 include "**/README"
+task makeTdsZip(dependsOn: 'resources') << {
+    copy {
+        from "example"
+        into TDS_DIR + "/doc/pmxchords/example"
+        include "**/*.pmx"
+        include "**/*.pdf"
+        include "**/README"
     }
 
-    copy { 
+    copy {
         from "doc"
-        into TDS_DIR+"/doc/pmxchords"
+        into TDS_DIR + "/doc/pmxchords"
     }
 
-    copy { 
+    copy {
         from "tex"
-        into TDS_DIR+"/tex/generic/pmxchords"
+        into TDS_DIR + "/tex/generic/pmxchords"
     }
 
-    copy { 
+    copy {
         from "README.tds"
-        into TDS_DIR+"/doc/pmxchords"
-		rename("README.tds", "README")
+        into TDS_DIR + "/doc/pmxchords"
+        rename("README.tds", "README")
     }
 
-    copy { 
+    copy {
         from "scripts"
-        into TDS_DIR+"/scripts"
-		exclude "test/**"
-		exclude "musixtex_steps.lua"
+        into TDS_DIR + "/scripts"
+        exclude "test/**"
+        exclude "musixtex_steps.lua"
     }
 
-	task myZip(type: Zip) {
-//	  destinationDir BUILD_DIR
-	  archiveName "pmxchords.tds.zip"
-	  from TDS_DIR
-//      include "**/*"
-	}
-//	FileTree zip = zipTree(TDS_DIR)
+    task(zipResources, type: Zip) {
+        destinationDir new File(BUILD_DIR)
+        archiveName 'pmxchords.tds.zip'
+        from TDS_DIR
+    }.execute()
 }
 

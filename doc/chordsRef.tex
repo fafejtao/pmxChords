@@ -1,0 +1,426 @@
+\documentclass[10pt]{article}
+\usepackage[landscape,a4paper,top=1.5cm,right=1.5cm,bottom=1.5cm,left=1.5cm]{geometry}
+\pagestyle{empty}
+%\usepackage[utf8]{inputenc}
+%\usepackage{czech}
+
+\begin{document}
+
+\input chords
+
+\def\chBase#1{\chFont #1}   % override default chord base macro
+
+\def\chSrc#1{\small \tt $\backslash$ch.#1.}
+
+\subsection*{Macro: chords}
+\begin{tabular}{ | l | l | l | l | l | l | l | l | l | l | l | l |}
+\hline
+  \ch.C.
+& \ch.Cs.
+& \ch.D.
+& \ch.Ef.
+& \ch.E.
+& \ch.F.
+& \ch.Fs.
+& \ch.G.
+& \ch.Af.
+& \ch.A.
+& \ch.Bf.
+& \ch.B.
+\\ 
+  \chSrc{C}
+& \chSrc{Cs}
+& \chSrc{D}
+& \chSrc{Ef}
+& \chSrc{E}
+& \chSrc{F}
+& \chSrc{Fs}
+& \chSrc{G}
+& \chSrc{Af}
+& \chSrc{A}
+& \chSrc{Bf}
+& \chSrc{B}
+\\ 
+\hline
+  \ch.Cm.
+& \ch.Csm.
+& \ch.Dm.
+& \ch.Efm.
+& \ch.Em.
+& \ch.Fm.
+& \ch.Fsm.
+& \ch.Gm.
+& \ch.Afm.
+& \ch.Am.
+& \ch.Bfm.
+& \ch.Bm.
+\\ 
+  \chSrc{Cm}
+& \chSrc{Csm}
+& \chSrc{Dm}
+& \chSrc{Efm}
+& \chSrc{Em}
+& \chSrc{Fm}
+& \chSrc{Fsm}
+& \chSrc{Gm}
+& \chSrc{Afm}
+& \chSrc{Am}
+& \chSrc{Bfm}
+& \chSrc{Bm}
+\\ 
+\hline
+  \ch.C+.
+& \ch.Cs+.
+& \ch.D+.
+& \ch.Ef+.
+& \ch.E+.
+& \ch.F+.
+& \ch.Fs+.
+& \ch.G+.
+& \ch.Af+.
+& \ch.A+.
+& \ch.Bf+.
+& \ch.B+.
+\\ 
+  \chSrc{C+}
+& \chSrc{Cs+}
+& \chSrc{D+}
+& \chSrc{Ef+}
+& \chSrc{E+}
+& \chSrc{F+}
+& \chSrc{Fs+}
+& \chSrc{G+}
+& \chSrc{Af+}
+& \chSrc{A+}
+& \chSrc{Bf+}
+& \chSrc{B+}
+\\ 
+\hline
+  \ch.C4.
+& \ch.Cs4.
+& \ch.D4.
+& \ch.Ef4.
+& \ch.E4.
+& \ch.F4.
+& \ch.Fs4.
+& \ch.G4.
+& \ch.Af4.
+& \ch.A4.
+& \ch.Bf4.
+& \ch.B4.
+\\ 
+  \chSrc{C4}
+& \chSrc{Cs4}
+& \chSrc{D4}
+& \chSrc{Ef4}
+& \chSrc{E4}
+& \chSrc{F4}
+& \chSrc{Fs4}
+& \chSrc{G4}
+& \chSrc{Af4}
+& \chSrc{A4}
+& \chSrc{Bf4}
+& \chSrc{B4}
+\\ 
+\hline
+  \ch.Cdim.
+& \ch.Csdim.
+& \ch.Ddim.
+& \ch.Efdim.
+& \ch.Edim.
+& \ch.Fdim.
+& \ch.Fsdim.
+& \ch.Gdim.
+& \ch.Afdim.
+& \ch.Adim.
+& \ch.Bfdim.
+& \ch.Bdim.
+\\ 
+  \chSrc{Cdim}
+& \chSrc{Csdim}
+& \chSrc{Ddim}
+& \chSrc{Efdim}
+& \chSrc{Edim}
+& \chSrc{Fdim}
+& \chSrc{Fsdim}
+& \chSrc{Gdim}
+& \chSrc{Afdim}
+& \chSrc{Adim}
+& \chSrc{Bfdim}
+& \chSrc{Bdim}
+\\ 
+\hline
+  \ch.Cmaj.
+& \ch.Csmaj.
+& \ch.Dmaj.
+& \ch.Efmaj.
+& \ch.Emaj.
+& \ch.Fmaj.
+& \ch.Fsmaj.
+& \ch.Gmaj.
+& \ch.Afmaj.
+& \ch.Amaj.
+& \ch.Bfmaj.
+& \ch.Bmaj.
+\\ 
+  \chSrc{Cmaj}
+& \chSrc{Csmaj}
+& \chSrc{Dmaj}
+& \chSrc{Efmaj}
+& \chSrc{Emaj}
+& \chSrc{Fmaj}
+& \chSrc{Fsmaj}
+& \chSrc{Gmaj}
+& \chSrc{Afmaj}
+& \chSrc{Amaj}
+& \chSrc{Bfmaj}
+& \chSrc{Bmaj}
+\\ 
+\hline
+  \ch.C6.
+& \ch.Cs6.
+& \ch.D6.
+& \ch.Ef6.
+& \ch.E6.
+& \ch.F6.
+& \ch.Fs6.
+& \ch.G6.
+& \ch.Af6.
+& \ch.A6.
+& \ch.Bf6.
+& \ch.B6.
+\\ 
+  \chSrc{C6}
+& \chSrc{Cs6}
+& \chSrc{D6}
+& \chSrc{Ef6}
+& \chSrc{E6}
+& \chSrc{F6}
+& \chSrc{Fs6}
+& \chSrc{G6}
+& \chSrc{Af6}
+& \chSrc{A6}
+& \chSrc{Bf6}
+& \chSrc{B6}
+\\ 
+\hline
+  \ch.C7.
+& \ch.Cs7.
+& \ch.D7.
+& \ch.Ef7.
+& \ch.E7.
+& \ch.F7.
+& \ch.Fs7.
+& \ch.G7.
+& \ch.Af7.
+& \ch.A7.
+& \ch.Bf7.
+& \ch.B7.
+\\ 
+  \chSrc{C7}
+& \chSrc{Cs7}
+& \chSrc{D7}
+& \chSrc{Ef7}
+& \chSrc{E7}
+& \chSrc{F7}
+& \chSrc{Fs7}
+& \chSrc{G7}
+& \chSrc{Af7}
+& \chSrc{A7}
+& \chSrc{Bf7}
+& \chSrc{B7}
+\\ 
+\hline
+  \ch.C9.
+& \ch.Cs9.
+& \ch.D9.
+& \ch.Ef9.
+& \ch.E9.
+& \ch.F9.
+& \ch.Fs9.
+& \ch.G9.
+& \ch.Af9.
+& \ch.A9.
+& \ch.Bf9.
+& \ch.B9.
+\\ 
+  \chSrc{C9}
+& \chSrc{Cs9}
+& \chSrc{D9}
+& \chSrc{Ef9}
+& \chSrc{E9}
+& \chSrc{F9}
+& \chSrc{Fs9}
+& \chSrc{G9}
+& \chSrc{Af9}
+& \chSrc{A9}
+& \chSrc{Bf9}
+& \chSrc{B9}
+\\ 
+\hline
+  \ch.C9f.
+& \ch.Cs9f.
+& \ch.D9f.
+& \ch.Ef9f.
+& \ch.E9f.
+& \ch.F9f.
+& \ch.Fs9f.
+& \ch.G9f.
+& \ch.Af9f.
+& \ch.A9f.
+& \ch.Bf9f.
+& \ch.B9f.
+\\ 
+  \chSrc{C9f}
+& \chSrc{Cs9f}
+& \chSrc{D9f}
+& \chSrc{Ef9f}
+& \chSrc{E9f}
+& \chSrc{F9f}
+& \chSrc{Fs9f}
+& \chSrc{G9f}
+& \chSrc{Af9f}
+& \chSrc{A9f}
+& \chSrc{Bf9f}
+& \chSrc{B9f}
+\\ 
+\hline
+  \ch.Cm7.
+& \ch.Csm7.
+& \ch.Dm7.
+& \ch.Efm7.
+& \ch.Em7.
+& \ch.Fm7.
+& \ch.Fsm7.
+& \ch.Gm7.
+& \ch.Afm7.
+& \ch.Am7.
+& \ch.Bfm7.
+& \ch.Bm7.
+\\ 
+  \chSrc{Cm7}
+& \chSrc{Csm7}
+& \chSrc{Dm7}
+& \chSrc{Efm7}
+& \chSrc{Em7}
+& \chSrc{Fm7}
+& \chSrc{Fsm7}
+& \chSrc{Gm7}
+& \chSrc{Afm7}
+& \chSrc{Am7}
+& \chSrc{Bfm7}
+& \chSrc{Bm7}
+\\ 
+\hline
+  \ch.Cm6.
+& \ch.Csm6.
+& \ch.Dm6.
+& \ch.Efm6.
+& \ch.Em6.
+& \ch.Fm6.
+& \ch.Fsm6.
+& \ch.Gm6.
+& \ch.Afm6.
+& \ch.Am6.
+& \ch.Bfm6.
+& \ch.Bm6.
+\\ 
+  \chSrc{Cm6}
+& \chSrc{Csm6}
+& \chSrc{Dm6}
+& \chSrc{Efm6}
+& \chSrc{Em6}
+& \chSrc{Fm6}
+& \chSrc{Fsm6}
+& \chSrc{Gm6}
+& \chSrc{Afm6}
+& \chSrc{Am6}
+& \chSrc{Bfm6}
+& \chSrc{Bm6}
+\\ 
+\hline
+  \ch.Cm5f.
+& \ch.Csm5f.
+& \ch.Dm5f.
+& \ch.Efm5f.
+& \ch.Em5f.
+& \ch.Fm5f.
+& \ch.Fsm5f.
+& \ch.Gm5f.
+& \ch.Afm5f.
+& \ch.Am5f.
+& \ch.Bfm5f.
+& \ch.Bm5f.
+\\ 
+  \chSrc{Cm5f}
+& \chSrc{Csm5f}
+& \chSrc{Dm5f}
+& \chSrc{Efm5f}
+& \chSrc{Em5f}
+& \chSrc{Fm5f}
+& \chSrc{Fsm5f}
+& \chSrc{Gm5f}
+& \chSrc{Afm5f}
+& \chSrc{Am5f}
+& \chSrc{Bfm5f}
+& \chSrc{Bm5f}
+\\ 
+\hline
+  \ch.C47.
+& \ch.Cs47.
+& \ch.D47.
+& \ch.Ef47.
+& \ch.E47.
+& \ch.F47.
+& \ch.Fs47.
+& \ch.G47.
+& \ch.Af47.
+& \ch.A47.
+& \ch.Bf47.
+& \ch.B47.
+\\ 
+  \chSrc{C47}
+& \chSrc{Cs47}
+& \chSrc{D47}
+& \chSrc{Ef47}
+& \chSrc{E47}
+& \chSrc{F47}
+& \chSrc{Fs47}
+& \chSrc{G47}
+& \chSrc{Af47}
+& \chSrc{A47}
+& \chSrc{Bf47}
+& \chSrc{B47}
+\\ 
+\hline
+  \ch.Cm75f.
+& \ch.Csm75f.
+& \ch.Dm75f.
+& \ch.Efm75f.
+& \ch.Em75f.
+& \ch.Fm75f.
+& \ch.Fsm75f.
+& \ch.Gm75f.
+& \ch.Afm75f.
+& \ch.Am75f.
+& \ch.Bfm75f.
+& \ch.Bm75f.
+\\ 
+  \chSrc{Cm75f}
+& \chSrc{Csm75f}
+& \chSrc{Dm75f}
+& \chSrc{Efm75f}
+& \chSrc{Em75f}
+& \chSrc{Fm75f}
+& \chSrc{Fsm75f}
+& \chSrc{Gm75f}
+& \chSrc{Afm75f}
+& \chSrc{Am75f}
+& \chSrc{Bfm75f}
+& \chSrc{Bm75f}
+\\ 
+\hline
+
+\end{tabular}
+
+\end{document}

@@ -2,7 +2,7 @@
 --
 -- global constants
 --
-VERSION = "0.9.1"
+VERSION = "0.9.2"
 FILE_SUFFIX="_chtr"
 PMX_CMD="pmxab"
 
@@ -31,9 +31,11 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 --[[
   ChangeLog:
 
-     version 0.9.1 2013-12-09 - added some options. Improved processing.
+    version 0.9.2 2013-12-13 - fixed: stop processing when pmxab fail...
 
-     version 0.9   2013-12-05 - rewrite code from perl to lua...
+    version 0.9.1 2013-12-09 - added some options. Improved processing.
+
+    version 0.9   2013-12-05 - rewritted code from perl to lua...
 --]]
 
 function usage()
@@ -68,7 +70,7 @@ function parseInputSignature(line)
 end
 
 function parseOutputSignature(line)
-   -- parse output signature from pmx 
+   -- parse output signature from pmx
    -- e.g.
    -- K-2+2
    -- output signature is +2 : D major
@@ -76,7 +78,7 @@ function parseOutputSignature(line)
    return tonumber(res)
 end
 
-function handleErr(msg) 
+function handleErr(msg)
    io.stderr:write(msg.."\n")
    os.exit(2)
 end
@@ -84,7 +86,7 @@ end
 --
 -- get file name without .pmx suffix
 --
-function getBaseFileName(fileName) 
+function getBaseFileName(fileName)
    if fileName ~= "" and string.sub(fileName, -4, -1) == ".pmx" then
 	  return string.sub(fileName, 1, -5)
    else
@@ -116,7 +118,7 @@ function makeChordsTransposition(baseName)
    -- transpose chords from inputFile into outputFile
    --
    -- input and output signature will be parsed from input pmx file
-   -- 
+   --
    local iSig = nil  -- input signature
    local chTr = nil  -- chords transposition class
 
@@ -150,14 +152,21 @@ end
 -- param baseName input file name without .pmx suffix
 -- param outputBaseName transposed pmx file name without .pmx suffix
 --
-function pmxabProcess(baseName, outputBaseName) 
+function pmxabProcess(baseName, outputBaseName)
    --
    -- call pmxab to generate .tex file
    --
-   local pmxResCode = os.execute(PMX_CMD .. " " .. outputBaseName )
-   if (pmxResCode ~= 0 ) then
-      io.stderr:write("PMX process fail! "..outputBaseName .."\n")
-      os.exit(pmxResCode)
+   os.execute(PMX_CMD .. " " .. outputBaseName )
+   -- check error
+   local pmxaerr = io.open("pmxaerr.dat", "r")
+   if (not pmxaerr) then
+       handleErr("No log file.")
+   end
+   linebuf = pmxaerr:read()
+   err = tonumber(linebuf)
+   pmxaerr:close()
+   if (err ~= 0 ) then
+      handleErr("PMX process fail! "..outputBaseName..".pmx")
    end
 
    os.rename(outputBaseName..".tex", baseName..".tex")
@@ -183,11 +192,13 @@ repeat
    else
       local baseName = getBaseFileName(this_arg)
       local outputBaseName = makeChordsTransposition(baseName)
-      
-      if (not onlyTranspose) then
-	 pmxabProcess(baseName, outputBaseName)
+
+      if (onlyTranspose) then
+          os.exit(0)
       end
+      pmxabProcess(baseName, outputBaseName)
    end
 
    narg = narg + 1
-until narg > #arg 
+until narg > #arg
+
