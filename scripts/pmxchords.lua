@@ -31,7 +31,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 --[[
   ChangeLog:
 
-    version 0.9.2 2013-12-13 - fixed: stop processing when pmxab fail...
+    version 0.9.2 2013-12-13 - fixed: stop processing when pmxab fail. 
+                             - Do not remove file pmxaerr.dat.
 
     version 0.9.1 2013-12-09 - added some options. Improved processing.
 
@@ -174,7 +175,6 @@ function pmxabProcess(baseName, outputBaseName)
    -- remove temporary files
    os.remove(outputBaseName..".pmx")
    os.remove(outputBaseName..".pml")
-   os.remove("pmxaerr.dat")
 end
 
 narg = 1
