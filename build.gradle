@@ -1,102 +1,21 @@
-def BUILD_DIR = "build"
-def TDS_DIR = "build/tds"
-def buildDir = new File(BUILD_DIR)
+defaultTasks 'makeCtanZip'
 
 task resources << {
     if (buildDir.isDirectory()) {
         println("Deleting buildDirectory")
         delete(buildDir)
     }
-    buildDir.mkdirs()
 }
 
-// TODO generate all examples in build time
+// TODO generate all examples (pdf) in build time
 //task makeExamples(dependsOn: 'resources') << {
-//    copy {
-//        from "example"
-//        into BUILD_DIR + "/example"
-//        include "**/*.pmx,example/jazz/schema/*.pdf"
-//    }
 //}
 
-/*
-Name
-----
-pmxchords/
-pmxchords/Windows/
-pmxchords/doc/
-pmxchords/doc/examples/                                                                                   
-pmxchords/doc/examples/jazz/                                                                              
-pmxchords/doc/examples/jazz/schema/                                                                       
-pmxchords/doc/examples/jazz/schema/schema_full.pmx                                                        
-pmxchords/doc/examples/jazz/schema/schema.pmx                                                             
-pmxchords/doc/examples/jazz/misty/
-pmxchords/doc/examples/jazz/misty/misty.pmx
-pmxchords/doc/examples/noel/
-pmxchords/doc/examples/noel/aj_co_to_hlasaju/
-pmxchords/doc/examples/noel/aj_co_to_hlasaju/aj_co_to_hlasaju.pmx
-pmxchords/doc/examples/noel/pasli_ovce_valasi/
-pmxchords/doc/examples/noel/pasli_ovce_valasi/README
-pmxchords/doc/examples/noel/pasli_ovce_valasi/pasli_ovce_valasi.pmx
-pmxchords/doc/chordsRef.tex
-pmxchords/doc/pmxchords.1
-pmxchords/doc/chordsRefCZ.tex
-pmxchords/doc/pmxchords-install.pdf
-pmxchords/doc/pmxchords-install.tex
-pmxchords/doc/gpl-2.0.txt
-pmxchords/doc/chordsRefCZ.pdf
-pmxchords/doc/chordsRef.pdf
-pmxchords/README
-pmxchords/scripts/
-pmxchords/scripts/pmxchords.lua
-pmxchords/scripts/ChordsTr.lua
-pmxchords/tex/
-pmxchords/tex/chordsCZ.tex
-pmxchords/tex/chords.tex
-pmxchords.tds.zip
-
-*/
-
-/*
-Archive:  pmxchords.tds.zip
-Name
-----
-tex/
-tex/generic/
-tex/generic/pmxchords/
-tex/generic/pmxchords/chords.tex
-tex/generic/pmxchords/chordsCZ.tex
-scripts/
-scripts/pmxchords/
-scripts/pmxchords/ChordsTr.lua
-scripts/pmxchords/pmxchords.lua
-doc/
-doc/pmxchords/
-doc/pmxchords/pmxchords-install.pdf
-doc/pmxchords/pmxchords.1
-doc/pmxchords/examples/
-doc/pmxchords/examples/jazz/
-doc/pmxchords/examples/jazz/schema/
-doc/pmxchords/examples/jazz/schema/schema.pmx
-doc/pmxchords/examples/jazz/schema/schema_full.pmx
-doc/pmxchords/examples/jazz/misty/
-doc/pmxchords/examples/jazz/misty/misty.pmx
-doc/pmxchords/examples/noel/
-doc/pmxchords/examples/noel/pasli_ovce_valasi/
-doc/pmxchords/examples/noel/pasli_ovce_valasi/pasli_ovce_valasi.pmx
-doc/pmxchords/examples/noel/pasli_ovce_valasi/README
-doc/pmxchords/examples/noel/aj_co_to_hlasaju/
-doc/pmxchords/examples/noel/aj_co_to_hlasaju/aj_co_to_hlasaju.pmx
-doc/pmxchords/chordsRefCZ.pdf
-doc/pmxchords/README
-doc/pmxchords/chordsRef.pdf
-doc/pmxchords/gpl-2.0.txt
-doc/pmxchords/pmxchords-install.tex
-*/
 task makeTdsZip(dependsOn: 'resources') << {
+    def TDS_DIR = buildDir.absolutePath + "/tds"
     copy {
         from "example"
-        into TDS_DIR + "/doc/pmxchords/example"
+        into TDS_DIR + "/doc/pmxchords/examples"
         include "**/*.pmx"
         include "**/*.pdf"
         include "**/README"
@@ -120,15 +39,65 @@ task makeTdsZip(dependsOn: 'resources') << {
 
     copy {
         from "scripts"
-        into TDS_DIR + "/scripts"
+        into TDS_DIR + "/scripts/pmxchords"
         exclude "test/**"
         exclude "musixtex_steps.lua"
     }
 
     task(zipResources, type: Zip) {
-        destinationDir new File(BUILD_DIR)
+        destinationDir buildDir
         archiveName 'pmxchords.tds.zip'
         from TDS_DIR
     }.execute()
 }
 
+task makeCtanZip(dependsOn: 'makeTdsZip') << {
+    def CTAN_DIR = buildDir.absolutePath + "/ctan"
+    copy {
+        from "Windows"
+        into CTAN_DIR + "/pmxchords/Windows"
+    }
+
+    copy {
+        from "example"
+        into CTAN_DIR + "/pmxchords/doc/examples"
+        include "**/*.pmx"
+        include "**/*.pdf"
+        include "**/README"
+    }
+
+    copy {
+        from "doc"
+        into CTAN_DIR + "/pmxchords/doc"
+    }
+
+    copy {
+        from "tex"
+        into CTAN_DIR + "/pmxchords/tex"
+    }
+
+    copy {
+        from "README.tds"
+        into CTAN_DIR + "/pmxchords"
+        rename("README.tds", "README")
+    }
+
+    copy {
+        from "scripts"
+        into CTAN_DIR + "/pmxchords/scripts"
+        exclude "test/**"
+        exclude "musixtex_steps.lua"
+    }
+
+    copy {
+        from buildDir
+        into CTAN_DIR
+        include "pmxchords.tds.zip"
+    }
+
+    task(ctanZipResources, type: Zip) {
+        destinationDir buildDir
+        archiveName 'pmxchords.zip'
+        from CTAN_DIR
+    }.execute()
+}
