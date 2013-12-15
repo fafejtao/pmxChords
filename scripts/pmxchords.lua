@@ -59,7 +59,8 @@ if #arg == 0 then
   os.exit(0)
 end
 
-require "ChordsTr" -- be careful file ChordsTr.lua must be on package.path
+kpse.set_program_name("luatex")
+require "ChordsTr"
 
 function parseInputSignature(line)
    -- parse input signature from pmx digits line. Only one line digits format is supported!
@@ -125,21 +126,21 @@ function makeChordsTransposition(baseName)
 
    for line in inputFile:lines() do
       if(chTr ~= nil) then
-	 outputFile:write(chTr:lineTranspose(line).."\n")
+		 outputFile:write(chTr:lineTranspose(line).."\n")
       else
-	 outputFile:write(line.."\n")
+		 outputFile:write(line.."\n")
       end
       if(iSig == nil) then
-	 iSig = parseInputSignature(line)
-	 if(iSig ~= nil) then
-	    io.stderr:write("Chords: input signature detected: "..iSig .."\n")
-	 end
+		 iSig = parseInputSignature(line)
+		 if(iSig ~= nil) then
+			io.stderr:write("Chords: input signature detected: "..iSig .."\n")
+		 end
       elseif(chTr == nil) then
-	 local oSig = parseOutputSignature(line)
-	 if(oSig ~= nil) then
-	    io.stderr:write("Chords: output signature detected: "..oSig .."\n")
-	    chTr = ChordsTr(iSig, oSig)
-	 end
+		 local oSig = parseOutputSignature(line)
+		 if(oSig ~= nil) then
+			io.stderr:write("Chords: output signature detected: "..oSig .."\n")
+			chTr = ChordsTr(iSig, oSig)
+		 end
       end
    end
    inputFile:close()
@@ -161,7 +162,7 @@ function pmxabProcess(baseName, outputBaseName)
    -- check error
    local pmxaerr = io.open("pmxaerr.dat", "r")
    if (not pmxaerr) then
-       handleErr("No log file.")
+	  handleErr("No log file.")
    end
    linebuf = pmxaerr:read()
    err = tonumber(linebuf)
@@ -194,7 +195,7 @@ repeat
       local outputBaseName = makeChordsTransposition(baseName)
 
       if (onlyTranspose) then
-          os.exit(0)
+		 os.exit(0)
       end
       pmxabProcess(baseName, outputBaseName)
    end
