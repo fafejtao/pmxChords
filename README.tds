@@ -1,4 +1,3 @@
-2013-12-11
 Author: Ondrej Fafejta <fafejtao@gmail.com>
 Website: https://github.com/fafejtao/pmxChords
 
@@ -18,3 +17,15 @@ For installation and usage, see the pmxchords-install document.
 pmxchords is licensed under the GPL version 2 or later.
 
 This README was edited by Bob Tennent (rdt@cs.queensu.ca).
+
+ChangeLog:
+
+version 2.0.1: 2013-12-13
+               Fixed:
+                - pmxchords.lua now loads correctly the ChordsTr module to make it work on Windows systems.
+                - pmxchords.lua does not remove the temporary file pmxaerr.dat
+                  that is required by Bob Tennent's pmx2pdf script.
+
+version 2.0.0: 2013-12-09 - rewrite code from perl to lua.
+
+version 1.0:  2012-03-16 - first version written in perl scripting language
