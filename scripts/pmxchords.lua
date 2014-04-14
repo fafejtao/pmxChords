@@ -2,7 +2,7 @@
 --
 -- global constants
 --
-VERSION = "0.9.2"
+VERSION = "0.9.3"
 FILE_SUFFIX = "_chtr"
 PMX_CMD = "pmxab"
 
@@ -30,6 +30,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 --[[
   ChangeLog:
+    version 0.9.3 2014-04-21 - fixed transposition problem:
+                               If song began in E-minor and signature is changed in half of song to A-minor
+                               transposition must be omitted.
 
     version 0.9.2 2013-12-13 - fixed: stop processing when pmxab fail. 
                              - When pmxab is called generated file pmxaerr.dat is not removed.
@@ -80,6 +83,35 @@ function parseOutputSignature(line)
     return tonumber(res)
 end
 
+--
+-- Strip comments from line
+-- Comments begin with % character
+--
+function lineWithoutComment(line)
+    local i = string.find(line, "%%")
+    if (i == nil) then
+        return line
+    end
+    return line:sub(0, i - 1)
+end
+
+--
+-- Function checks only if the line contains \ch. string.
+-- It does not check correctly if notes already started. It checks only if chords started..
+-- Scenario bellow will fail!
+--   d44 f a r / % first line does not contain chords symbol
+--   % signature is changed
+--   K+0+0
+--   \ch.C.\ c44 e g r4 /
+--
+function checkChordsAlreadyStarted(line)
+    local i = string.find(lineWithoutComment(line), ChordsTr.CHORDS_BEGIN)
+    if (i ~= nil) then
+        return true
+    end
+    return false;
+end
+
 function handleErr(msg)
     io.stderr:write(msg .. "\n")
     os.exit(2)
@@ -124,6 +156,10 @@ function makeChordsTransposition(baseName)
     local iSig = nil -- input signature
     local chTr = nil -- chords transposition class
 
+    -- If song began in E-minor and signature is changed in half of song to A-minor
+    --      transposition must be omitted.
+    local chordsAlreadyStarted = false;
+
     for line in inputFile:lines() do
         if (chTr ~= nil) then
             outputFile:write(chTr:lineTranspose(line) .. "\n")
@@ -135,11 +171,14 @@ function makeChordsTransposition(baseName)
             if (iSig ~= nil) then
                 io.stderr:write("Chords: input signature detected: " .. iSig .. "\n")
             end
-        elseif (chTr == nil) then
+        elseif (chTr == nil and not chordsAlreadyStarted) then
             local oSig = parseOutputSignature(line)
             if (oSig ~= nil) then
                 io.stderr:write("Chords: output signature detected: " .. oSig .. "\n")
                 chTr = ChordsTr(iSig, oSig)
+            elseif (checkChordsAlreadyStarted(line)) then
+                io.stderr:write("Chords: notes already started. Chords transposition is omitted.\n")
+                chordsAlreadyStarted = true;
             end
         end
     end
@@ -164,8 +203,8 @@ function pmxabProcess(baseName, outputBaseName)
     if (not pmxaerr) then
         handleErr("No log file.")
     end
-    linebuf = pmxaerr:read()
-    err = tonumber(linebuf)
+    local linebuf = pmxaerr:read()
+    local err = tonumber(linebuf)
     pmxaerr:close()
     if (err ~= 0) then
         handleErr("PMX process fail! " .. outputBaseName .. ".pmx")
@@ -182,7 +221,7 @@ narg = 1
 onlyTranspose = false
 
 repeat
-    this_arg = arg[narg]
+    local this_arg = arg[narg]
     if this_arg == "-v" then
         os.exit(0)
     elseif this_arg == "-h" then

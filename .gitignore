@@ -6,3 +6,5 @@
 pmxaerr.dat
 .gradle
 build
+.idea
+*.iml
