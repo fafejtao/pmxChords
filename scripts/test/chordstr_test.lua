@@ -4,7 +4,8 @@ require "ChordsTr"
 function test(iSig, oSig, t) 
    local chTr = ChordsTr(iSig, oSig)
    for k,v in pairs(t) do
-      res = chTr:doTranspose(k)
+      local res = chTr:doTranspose(k)
+      print(k, v, chTr:lineTranspose("Some text before chord, \\ch." .. k .. ".\\ bla bla"))
 --      print(k, v, res)
       assert(v == res, "Illegal chord transposition! inputChord = "..k..", expected = "..v..", returned = ".. res)
    end

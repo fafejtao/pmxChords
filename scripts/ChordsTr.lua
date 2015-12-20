@@ -78,19 +78,19 @@ function ChordsTr:lineTranspose(line)
     local pos = 0;
     local trLine = "" -- transposed line (result)
     while true do
-        local i = string.find(line, ChordsTr.CHORDS_BEGIN, pos)
+        local i = line:find(ChordsTr.CHORDS_BEGIN, pos)
         if i == nil then
-            trLine = trLine .. string.sub(line, pos)
+            trLine = trLine .. line:sub(pos)
             break
         end
         i = i + 3 -- move after \ch.
-        trLine = trLine .. string.sub(line, pos, i) -- append non chord string into result
-        pos = string.find(line, ChordsTr.CHORDS_END, i)
+        trLine = trLine .. line:sub(pos, i) -- append non chord string into result
+        pos = line:find(ChordsTr.CHORDS_END, i)
         if pos == nil then -- TODO check correctly end of chords ... e.g. check wrong line (first chord is not finished correctly): \ch.C. c \ch.G7.\ b
             io.stderr:write("End of chords was not found!\n")
             os.exit(-1)
         end
-        chord = string.sub(line, i + 1, pos - 1)
+        local chord = line:sub(i + 1, pos - 1)
         trLine = trLine .. self:doTranspose(chord)
     end
     return trLine
@@ -112,11 +112,11 @@ function ChordsTr.splitChord(chord)
     if (chord.len == 1) then
         return chord, ""
     end
-    local secondChar = string.sub(chord, 2, 2)
+    local secondChar = chord:sub(2, 2)
     if (secondChar == 's' or secondChar == 'f') then
-        return chord.sub(chord, 1, 2), chord.sub(chord, 3)
+        return chord:sub(1, 2), chord:sub(3)
     else
-        return chord.sub(chord, 1, 1), chord.sub(chord, 2)
+        return chord:sub(1, 1), chord:sub(2)
     end
 end
 --
