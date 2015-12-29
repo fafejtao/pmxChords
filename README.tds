@@ -20,6 +20,11 @@ This README was edited by Bob Tennent (rdt@cs.queensu.ca).
 
 ChangeLog:
 
+version 2.0.2: 2014-04-21
+               fixed transposition problem:
+               If song began in E-minor and signature is changed in half of song to A-minor
+               transposition must be omitted.
+
 version 2.0.1: 2013-12-13
                Fixed:
                 - pmxchords.lua now loads correctly the ChordsTr module to make it work on Windows systems.
