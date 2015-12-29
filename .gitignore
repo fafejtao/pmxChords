@@ -4,7 +4,6 @@
 *.pml
 *.log
 pmxaerr.dat
-.gradle
 build
 .idea
 *.iml
